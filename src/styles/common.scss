@@ -1,0 +1,34 @@
+@use '~@angular/material/theming' as material;
+@use 'sass:map';
+@use '../app/banner/banner.component.scss-theme.scss' as banner;
+@use '../app/app.component.scss-theme.scss' as root;
+
+
+$workshop-typography: material.mat-typography-config(
+    $font-family: "'Open Sans', sans-serif",
+    $display-4:  material.mat-typography-level(95px, 95px, 300, $letter-spacing: -0.05em)
+);
+
+
+// Extra colors
+$workshop-success: material.mat-palette(material.$mat-green);
+$workshop-info: material.mat-palette(material.$mat-blue);
+
+
+@function apply-extra-colors($theme) {
+    @return map.deep-merge($theme,(
+        success: $workshop-success,
+        info: $workshop-info,
+        color:(
+            success: $workshop-success,
+            info: $workshop-info
+        )
+    ));
+}
+
+
+@mixin create-theme($theme) {
+    @include material.angular-material-theme($theme);
+    @include banner.app-banner-theme($theme);
+    @include root.app-root-theme($theme);
+}

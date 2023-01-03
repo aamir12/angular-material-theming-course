@@ -1,0 +1,7 @@
+@use '~@angular/material/theming' as material;
+@use './styles/common.scss' as common;
+
+@include material.mat-core(common.$workshop-typography);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
