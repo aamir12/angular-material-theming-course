@@ -28,7 +28,18 @@ $workshop-info: material.mat-palette(material.$mat-blue);
 
 
 @mixin create-theme($theme) {
-    @include material.angular-material-theme($theme);
+    //@include material.angular-material-theme($theme); //it include everything
+    
+    //to reduce bundle size; only used component css  will be applied here
+    @include material.mat-core-theme($theme);
+    @include material.mat-select-theme($theme);
+    @include material.mat-toolbar-theme($theme);
+    @include material.mat-button-theme($theme);
+    @include material.mat-card-theme($theme); 
+    @include material.mat-form-field-theme($theme);  
+    @include material.mat-input-theme($theme);
+    @include material.mat-sidenav-theme($theme);
+    
     @include banner.app-banner-theme($theme);
     @include root.app-root-theme($theme);
 }
