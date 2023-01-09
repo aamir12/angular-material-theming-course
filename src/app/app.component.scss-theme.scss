@@ -1,9 +1,20 @@
-@use '~@angular/material/theming' as material;
+@use '~@angular/material' as mat;
+@use '~@angular/material/core/density/private/compatibility';
+@use '~@angular/material/toolbar/toolbar-variables';
+@use 'sass:map';
 
 @mixin app-root-theme($theme) {
-    $theme-colors : material.mat-get-color-config($theme);
-    $background: map-get($theme-colors,background);
+    $theme-colors : mat.get-color-config($theme);
+    $background: map.get($theme-colors,background);
+    $density-scale: mat.get-density-config($theme);
+
+    $toolbar-height: compatibility.private-density-prop-value(
+        toolbar-variables.$desktop-density-config,
+        $density-scale,
+        height
+    );
     .content {
-        background-color: material.mat-color($background,card);
+        background-color: mat.get-color-from-palette($background,card);
+        min-height: calc(100vh - #{$toolbar-height});
     }
 }

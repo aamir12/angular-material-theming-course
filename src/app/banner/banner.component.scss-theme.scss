@@ -1,27 +1,28 @@
-@use '~@angular/material/theming' as material;
+@use '~@angular/material' as mat;
+@use 'sass:map';
 
 @mixin app-banner-typography($typography-config) {
     app-banner {
         .heading {
-            @include material.mat-typography-level-to-styles($typography-config,title);
-            line-height: material.mat-line-height($typography-config,title);
+            @include mat.typography-level($typography-config,title);
+            line-height: mat.line-height($typography-config,title);
         }
 
         .message {
-            @include material.mat-typography-level-to-styles($typography-config,body-1);
+            @include mat.typography-level($typography-config,body-1);
         }
 
     }
 }
 
 @mixin app-banner-theme($theme) {
-   $theme-colors: material.mat-get-color-config($theme); //get all palette
-   $typography: material.mat-get-typography-config($theme);
+   $theme-colors: mat.get-color-config($theme); //get all palette
+   $typography: mat.get-typography-config($theme);
 
-   $success-color-palette: map-get($theme-colors,success); //get palette
-   $info-color-palette: map-get($theme-colors,info); //get palette
-   $warn-color-palette: map-get($theme-colors,warn); //get palette
-   $background: map-get($theme-colors,background); //get palette
+   $success-color-palette: map.get($theme-colors,success); //get palette
+   $info-color-palette: map.get($theme-colors,info); //get palette
+   $warn-color-palette: map.get($theme-colors,warn); //get palette
+   $background: map.get($theme-colors,background); //get palette
 
    @if $typography != null {
        @include app-banner-typography($typography);
@@ -29,15 +30,15 @@
 
    app-banner {
        //chose color which apply to card
-       background-color: material.mat-color($background,card); 
+       background-color: mat.get-color-from-palette($background,card); 
        &.app-banner-success {
-        background-color: material.mat-color($success-color-palette,lighter);
+        background-color: mat.get-color-from-palette($success-color-palette,lighter);
        }
        &.app-banner-info {
-        background-color: material.mat-color($info-color-palette,lighter);
+        background-color: mat.get-color-from-palette($info-color-palette,lighter);
        }
        &.app-banner-warn {
-        background-color: material.mat-color($warn-color-palette,lighter);
+        background-color: mat.get-color-from-palette($warn-color-palette,lighter);
        }
    }
 }

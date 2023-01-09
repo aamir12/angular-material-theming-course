@@ -1,14 +1,19 @@
-@use '~@angular/material/theming' as material;
+@use '~@angular/material' as mat;
+@use '~@angular/material/core/focus-indicators/focus-indicators';
+@use '~@angular/cdk/a11y';
+@use '~@angular/cdk/overlay';
+@use '~@angular/cdk/text-field';
 @use './styles/common.scss' as common;
 
 //@include material.mat-core(common.$workshop-typography);
 
-@include material.angular-material-typography(common.$workshop-typography);
-@include material.mat-ripple();
-@include material.cdk-a11y();
-@include material.cdk-overlay();
-@include material.cdk-text-field();
-@include material.mat-base-typography(common.$workshop-typography,"body");
+//@include mat.all-component-typographies(common.$workshop-typography);
+@include mat.ripple();
+@include a11y.a11y-visually-hidden();
+@include overlay.overlay();
+@include text-field.text-field-autosize();
+@include text-field.text-field-autofill();
+@include mat.typography-hierarchy(common.$workshop-typography,"body");
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
